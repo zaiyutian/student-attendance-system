@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="form-card card">
+    <view class="form-title">选择学生</view>
+    <view class="student-select" bindtap="selectStudent">
+      <view class="selected-info" wx:if="{{selectedStudent}}">
+        <view class="mini-avatar">
+          <text>{{selectedStudent.name.charAt(0)}}</text>
+        </view>
+        <view class="selected-text">
+          <text class="name">{{selectedStudent.name}}</text>
+          <text class="class">{{selectedStudent.class}}</text>
+        </view>
+      </view>
+      <view class="placeholder" wx:else>
+        <text>点击选择学生</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">选择日期</view>
+    <view class="date-picker" bindtap="showDatePicker">
+      <text>{{selectedDate}}</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">考勤状态</view>
+    <view class="status-grid">
+      <view 
+        wx:for="{{statusOptions}}" 
+        wx:key="value"
+        class="status-item {{selectedStatus === item.value ? 'active' : ''}}"
+        bindtap="selectStatus"
+        data-value="{{item.value}}"
+      >
+        <view class="status-icon">{{item.icon}}</view>
+        <text class="status-name">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">备注（可选）</view>
+    <textarea 
+      class="remark-input" 
+      placeholder="请输入备注信息..." 
+      value="{{remark}}"
+      bindinput="onRemarkInput"
+      maxlength="200"
+    />
+  </view>
+
+  <view class="submit-btn-wrap">
+    <button class="submit-btn btn-primary" bindtap="submitAttendance">
+      确认添加
+    </button>
+  </view>
+</view>
+
+<view class="student-modal" wx:if="{{showStudentModal}}" bindtap="closeModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">选择学生</text>
+      <text class="modal-close" bindtap="closeModal">×</text>
+    </view>
+    <scroll-view scroll-y class="modal-body">
+      <view 
+        wx:for="{{students}}" 
+        wx:key="id"
+        class="modal-item {{selectedStudent && selectedStudent.id === item.id ? 'selected' : ''}}"
+        bindtap="confirmStudent"
+        data-student="{{item}}"
+      >
+        <view class="modal-avatar">
+          <text>{{item.name.charAt(0)}}</text>
+        </view>
+        <view class="modal-info">
+          <text class="modal-name">{{item.name}}</text>
+          <text class="modal-class">{{item.class}} · {{item.studentId}}</text>
+        </view>
+        <view class="modal-check" wx:if="{{selectedStudent && selectedStudent.id === item.id}}">✓</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

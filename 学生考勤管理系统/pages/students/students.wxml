@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input" 
+        placeholder="搜索学生姓名或学号" 
+        value="{{searchText}}"
+        bindinput="onSearchInput"
+      />
+    </view>
+  </view>
+
+  <view class="class-filter">
+    <scroll-view scroll-x class="class-scroll">
+      <view class="class-list">
+        <view 
+          wx:for="{{classes}}" 
+          wx:key="id"
+          class="class-item {{selectedClass === item.id ? 'active' : ''}}"
+          bindtap="selectClass"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="student-count">
+    <text>共 {{filteredStudents.length}} 名学生</text>
+  </view>
+
+  <view class="student-list">
+    <view 
+      wx:for="{{filteredStudents}}" 
+      wx:key="id" 
+      class="student-item card"
+      bindtap="showStudentInfo"
+      data-student="{{item}}"
+    >
+      <view class="avatar-wrap">
+        <view class="avatar">
+          <text>{{item.name.charAt(0)}}</text>
+        </view>
+      </view>
+      <view class="student-info">
+        <text class="student-name">{{item.name}}</text>
+        <text class="student-detail">{{item.class}} · {{item.studentId}}</text>
+      </view>
+      <view class="action-btns">
+        <view class="action-btn" bindtap="goAddAttendance" data-id="{{item.id}}" data-name="{{item.name}}">
+          <text>考勤</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{filteredStudents.length === 0}}" class="empty-state">
+    <text class="empty-icon">👥</text>
+    <text class="empty-text">暂无学生</text>
+  </view>
+</view>

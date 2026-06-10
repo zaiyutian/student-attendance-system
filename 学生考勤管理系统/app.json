@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/students/students",
+    "pages/add-attendance/add-attendance",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarTitleText": "学生考勤管理",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "考勤记录",
+        "iconPath": "images/attendance.png",
+        "selectedIconPath": "images/attendance-active.png"
+      },
+      {
+        "pagePath": "pages/students/students",
+        "text": "学生管理",
+        "iconPath": "images/students.png",
+        "selectedIconPath": "images/students-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

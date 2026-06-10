@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="detail-card card" wx:if="{{attendance}}">
+    <view class="student-section">
+      <view class="large-avatar">
+        <text>{{attendance.studentName.charAt(0)}}</text>
+      </view>
+      <view class="student-detail">
+        <text class="student-name">{{attendance.studentName}}</text>
+        <text class="attendance-date">{{attendance.date}}</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="info-section">
+      <view class="info-row">
+        <text class="info-label">考勤状态</text>
+        <text class="info-value">
+          <text class="status-badge {{'status-' + attendance.status}}">{{getStatusText(attendance.status)}}</text>
+        </text>
+      </view>
+
+      <view class="info-row">
+        <text class="info-label">备注信息</text>
+        <text class="info-value remark-text">{{attendance.remark || '无'}}</text>
+      </view>
+
+      <view class="info-row">
+        <text class="info-label">记录ID</text>
+        <text class="info-value">{{attendance.id}}</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="action-section">
+      <button class="action-btn edit-btn" bindtap="editAttendance">
+        <text>编辑记录</text>
+      </button>
+      <button class="action-btn delete-btn" bindtap="deleteAttendance">
+        <text>删除记录</text>
+      </button>
+    </view>
+  </view>
+
+  <view wx:if="{{!attendance}}" class="empty-state">
+    <text class="empty-icon">❓</text>
+    <text class="empty-text">考勤记录不存在</text>
+    <button class="back-btn" bindtap="goBack">返回列表</button>
+  </view>
+</view>
